@@ -12,4 +12,9 @@ class Bingo extends CI_Controller {
 	{
 		$this->load->view('board');
 	}
+
+	public function result()
+	{
+		$this->load->view('result');
+	}
 }

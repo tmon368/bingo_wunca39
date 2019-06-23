@@ -428,6 +428,10 @@
             border-bottom: 1px dotted rgba(255,255,255,0.6);
             color: rgba(255,255,255,1.0);
         }
+
+        .error{
+            color: red;
+        }
     </style>
   </head>
   <body>
@@ -451,8 +455,8 @@
                 
                     <!-- Login Form -->
                 <form id="login-form">
-                    <input type="text" id="login" class="fadeIn second" name="userId" placeholder="รหัสผู้เข้าร่วมงาน">
-                    <input type="text" id="name" class="fadeIn second" name="name" placeholder="ชื่อผู้เข้าร่วมงาน">
+                    <input type="text" id="login" class="fadeIn second" name="userId" placeholder="รหัสผู้เข้าร่วมงาน" required>
+                    <input type="text" id="name" class="fadeIn second" name="name" placeholder="ชื่อผู้เข้าร่วมงาน" required>
                     <input type="submit" class="fadeIn fourth" value="เข้าสู่ระบบ">
                 </form>
                 
@@ -472,12 +476,13 @@
     
     <script>
         var base_url = "<?php echo base_url()?>/api/";
+        var form = $("#login-form");
 
         $("#login-form").submit(function (e) { 
             e.preventDefault();
             var id = $("#login").val();
             var name = $("#name").val();
-            if(id && name){
+            if(form.valid()){
                 getUserDataAndRound(id, name);
             }
         });
@@ -506,9 +511,17 @@
 
         $(document).ready(function () {
             var data = JSON.parse(localStorage.getItem("data"));
-            var form = $("#login-form");
             
-
+            form.validate({
+                rules:{
+                    userId :{ required : true },
+                    name :{ required : true }
+                },
+                messages:{
+                    userId :{ required : "กรุณากรอกรหัสผู้เข้าร่วมงาน" },
+                    name :{ required : "กรุณากรอกชื่อผู้เข้าร่วมงาน" }
+                }
+            });
 
             if(data){
                 window.location.href = "board";
