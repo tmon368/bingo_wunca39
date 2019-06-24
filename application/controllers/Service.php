@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 
 class Service extends CI_Controller {
 	public function index()
@@ -7,12 +9,7 @@ class Service extends CI_Controller {
 		//$this->load->view('welcome_message');
 		echo "Service";
 	}
-	public function getContact_Desc(){
-		echo "getContact_Desc";	
-	}
-	public function getContact(){
-		echo "getContact";	
-	}
+	
 	public function random_data($set,$arr_amount,$row_amount, $col_amount){
 
 		//หาว่าตัวเลขแต่ละตัวมีกี่ซ้ำ
@@ -128,8 +125,12 @@ class Service extends CI_Controller {
 		$sheet_size = 5;
 
 		$this->load->model('BingoSheet');
+		
 		$data = $this->random_data($set,$arr_amount,$sheet_size,$sheet_size);
-		//var_dump($data);
 		$this->BingoSheet->insert_sheet($data,$sheet_size);
+		//Bingo_Job
+		//bingo_player
+		//bingo_value
+		//players
 	}
 }
