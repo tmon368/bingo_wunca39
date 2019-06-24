@@ -398,6 +398,7 @@
                         </div>
                     </div>
                 </div>
+                <br>
             </div>
         </div>
     </div>
@@ -409,7 +410,7 @@
     
     <script>
         var arrResult = [];
-        var base_url = "<?php echo base_url()?>/api/";
+        var base_url = "<?php echo base_url() ?>/api/";
 
         function logout(){
             $.confirm({

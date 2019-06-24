@@ -475,7 +475,7 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.1/dist/jquery.validate.min.js"></script>
     
     <script>
-        var base_url = "<?php echo base_url()?>/api/";
+        var base_url = "<?php echo base_url() ?>/api/";
         var form = $("#login-form");
 
         $("#login-form").submit(function (e) { 

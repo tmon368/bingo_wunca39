@@ -125,8 +125,8 @@
                     <span class="violet">Bin</span><span class="orange">go</span>
                     </div>
                     <br>
-                    <div class="row text-center">
-                        <div class="col-md-2 padding-b-40"><span class="ball">1</span></div>
+                    <div class="row text-center" id="bingoNumber">
+                        <!-- <div class="col-md-2 padding-b-40"><span class="ball">1</span></div>
                         <div class="col-md-2 padding-b-40"><span class="ball">2</span></div>
                         <div class="col-md-2 padding-b-40"><span class="ball">3</span></div>
                         <div class="col-md-2 padding-b-40"><span class="ball">4</span></div>
@@ -149,7 +149,7 @@
                         <div class="col-md-2 padding-b-40"><span class="ball">20</span></div>
                         <div class="col-md-2 padding-b-40"><span class="ball">21</span></div>
                         <div class="col-md-2 padding-b-40"><span class="ball">22</span></div>
-                        <div class="col-md-2 padding-b-40"><span class="last-ball">23</span></div>
+                        <div class="col-md-2 padding-b-40"><span class="last-ball">23</span></div> -->
                     </div>
                 </div>
             </div>
@@ -168,8 +168,8 @@
                                         <th scope="col">ชื่อ</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
+                                <tbody id="bingoResult">
+                                    <!-- <tr>
                                         <th scope="row" class="text-center">1</th>
                                         <td class="text-center">w0001</td>
                                         <td>demo demo</td>
@@ -183,7 +183,7 @@
                                         <th scope="row"  class="text-center">3</th>
                                         <td class="text-center">w0003</td>
                                         <td>demo demo</td>
-                                    </tr>
+                                    </tr> -->
                                 </tbody>
                             </table>
                         </div>
@@ -197,5 +197,57 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
+    <script>
+        var bingoNumber = $("#bingoNumber");
+        var b_round = $("#b-round");
+        var bingoResult = $("#bingoResult");
+        var base_url = "<?php echo base_url() ?>/api/";
+
+        function renderBingoNumber(arrBingoNumber){
+            var length = arrBingoNumber.length;
+            var html = "";
+            $.each(arrBingoNumber, function (i, v) {
+                if(i == length-1){
+                    html += '<div class="col-md-2 padding-b-40"><span class="last-ball">'+v+'</span></div>';
+                }else{
+                    html += '<div class="col-md-2 padding-b-40"><span class="ball">'+v+'</span></div>';
+                }
+            });
+            bingoNumber.html(html);
+        }
+
+        function setRound(round){
+            b_round.html(round);
+        }
+
+        function renderBingoResult(arrBingoResult){
+            var html = "";
+            $.each(arrBingoResult, function (i, v) { 
+                html += '<tr>'
+                            +'<th scope="row" class="text-center">'+(i+1)+'</th>'
+                            +'<td class="text-center">'+v.code_id+'</td>'
+                            +'<td>'+v.fname+'</td>'
+                        +'</tr>';
+            });
+            bingoResult.html(html);
+        }
+
+        function getResultShow(){
+            $.get(base_url+"/getresultshow",
+                function (data, textStatus, jqXHR) {
+                    var json_data = JSON.parse(data);
+                    console.log(json_data);
+                    setRound(json_data.round);
+                    renderBingoNumber(json_data.resultnumber);
+                    renderBingoResult(json_data.resultbingo);
+                }
+            );
+        }
+
+        $(document).ready(function () {
+            getResultShow();
+            setInterval(function(){ getResultShow(); }, 5000);
+        });
+    </script>
 </body>
 </html>
