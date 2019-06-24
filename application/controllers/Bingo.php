@@ -17,4 +17,9 @@ class Bingo extends CI_Controller {
 	{
 		$this->load->view('result');
 	}
+	
+	public function addResult()
+	{
+		$this->load->view('add_bingo_result');
+	}
 }
