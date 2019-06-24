@@ -8,12 +8,13 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <style>
         body{
             font-family: 'Lobster', cursive !important;
         }
     </style>
-    <title>Bingo Award</title>
+    <title>Bingo Round</title>
 
     <style>
 
@@ -110,6 +111,15 @@
             text-align: center;
         }
 
+        .mr-10{
+            margin-right: 10px;
+        }
+        .mg-10{
+            margin: 10px;
+        }
+        .f-53{
+            font-size: 53px;
+        }
     </style>
   </head>
   <body>
@@ -125,6 +135,18 @@
                     <span class="violet">Bin</span><span class="orange">go</span>
                     </div>
                     <br>
+                    <div class="row justify-content-end mr-10">
+                        <div class="col-6">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="bingo number">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="fa fa-plus-square" aria-hidden="true"></i> add
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row text-center">
                         <div class="col-md-2 padding-b-40"><span class="ball">1</span></div>
                         <div class="col-md-2 padding-b-40"><span class="ball">2</span></div>
@@ -156,36 +178,26 @@
             <div class="col-4">
                 <div class="bg-white scroll">
                     <div class="text-center">
-                        <span class="violet">Bingo</span><span class="orange"> Award</span>
+                        <span class="violet">Bingo</span><span class="orange"> Round</span>
                     </div>
-                    <div class="row">
+                    <div class="row mg-10">
                         <div class="col-12">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">ลำดับ</th>
-                                        <th scope="col">รหัส</th>
-                                        <th scope="col">ชื่อ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th scope="row" class="text-center">1</th>
-                                        <td class="text-center">w0001</td>
-                                        <td>demo demo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"  class="text-center">2</th>
-                                        <td class="text-center">w0002</td>
-                                        <td>demo demo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row"  class="text-center">3</th>
-                                        <td class="text-center">w0003</td>
-                                        <td>demo demo</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="bingo number">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="fa fa-plus-square" aria-hidden="true"></i> add
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row text-center mg-10">
+                        <div class="col">
+                            <span class="f-53">
+                                <span>round</span><br>
+                                <span class="violet">#</span>
+                            </span>
                         </div>
                     </div>
                 </div>
