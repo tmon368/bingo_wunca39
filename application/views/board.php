@@ -349,7 +349,7 @@
             <div class="col-lg-6">
                 <img src="https://wunca.uni.net.th/wunca39/wp-content/uploads/2019/03/WUNCA-39th_png-ok-copy.png" id="icon" alt="User Icon" width="30%" /><br>
                 <div class="row mt">
-                    <div class="col-lg-9 text-left">สวัสดีคุณ <span id="b-name"></span> ผู้เข้าร่วมงาน <span id="b-code"></span> </div>
+                    <div class="col-lg-9 text-left">สวัสดีคุณ <span id="b-name"></span> รหัสผู้เข้าร่วมงาน <span id="b-code"></span> </div>
                     <div class="col-lg-3"><a href="#" class="c-orange" onclick="logout()">[ออกจากระบบ]</a></div>
                 </div>
                 <div class="t-border">
