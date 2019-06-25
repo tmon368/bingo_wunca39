@@ -143,16 +143,14 @@
                     <br>
                     <div class="row justify-content-end mr-10">
                         <div class="col-6">
-                            <form id="bingo-form">
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="bingo number" id="input-bingoNumber">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button" onclick="pushNumber()">
-                                            <i class="fa fa-plus-square" aria-hidden="true"></i> add
-                                        </button>
-                                    </div>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="bingo number" id="input-bingoNumber">
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-secondary" type="button" onclick="pushNumber()">
+                                        <i class="fa fa-plus-square" aria-hidden="true"></i> add
+                                    </button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                     <div class="row text-center" id="bingoNumber">
@@ -227,7 +225,6 @@
                 var json_data = JSON.parse(data);
                 if(json_data.status){
                     getResultShow();
-                    input_bingoNumber.val("");
                 }
             });
         }
@@ -335,11 +332,6 @@
 
         $(document).ready(function () {
             getResultShow();
-
-            $("#bingo-form").submit(function (e) { 
-                e.preventDefault();
-                pushNumber();
-            });
         });
     </script>
 </body>

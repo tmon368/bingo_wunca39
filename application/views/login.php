@@ -377,7 +377,7 @@
             color: orange;
         }
         #icon {
-            width:125px;
+            width:30%;
         }
 
         #info {
@@ -450,7 +450,7 @@
                 <!-- Icon -->
                 <div class="fadeIn first">
                     <img src="https://wunca.uni.net.th/wunca39/wp-content/uploads/2019/03/WUNCA-39th_png-ok-copy.png" id="icon" alt="User Icon" /><br>
-                    <span class="violet">Bing</span><span class="orange">o</span>
+                    <span class="violet">Bin</span><span class="orange">go</span>
                 </div>
                 
                     <!-- Login Form -->

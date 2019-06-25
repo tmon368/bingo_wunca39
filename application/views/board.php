@@ -331,7 +331,7 @@
             .bg-fire{
                 background-color: #dadada;
             }
-
+            
             .none-event{
                 pointer-events: none;
                 filter: grayscale(20%);
@@ -419,8 +419,6 @@
 
         function logout(){
             $.confirm({
-                title: 'คำเตือน!',
-                content: 'คุณต้องการออกจากระบบใช่หรือไม่',
                 buttons: {
                     ok: {
                         text: 'ออกจากระบบ', // With spaces and symbols
