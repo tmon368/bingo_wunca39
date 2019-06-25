@@ -419,6 +419,8 @@
 
         function logout(){
             $.confirm({
+                title: 'ออกจากระบบ',
+                content: 'คุณต้องการออกจากระบบใช่หรือไม่',
                 buttons: {
                     ok: {
                         text: 'ออกจากระบบ', // With spaces and symbols
