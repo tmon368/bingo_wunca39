@@ -42,7 +42,7 @@
         }
 
         .h-50vh{
-            max-height: 66vh;
+            max-height: 72vh;
         }
 
         .h-250{
