@@ -8,6 +8,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+
     <style>
         body{
             font-family: 'Lobster', cursive !important;
@@ -31,7 +34,19 @@
             background-color: white;
             margin: 15px 0px 0px 0px;
             border-radius: 10px;
-            height: 95vh;
+            height: 98vh;
+        }
+
+        .h-95vh{
+            max-height: 880px;
+        }
+
+        .h-50vh{
+            max-height: 66vh;
+        }
+
+        .h-250{
+            max-height: 180px;
         }
 
         .violet{
@@ -110,13 +125,34 @@
             text-align: center;
         }
 
+        .w-10p{
+            width: 10%;
+        }
+
+        .r-number{
+            font-size: 100px;
+        }
+
+        .pt-45{
+            padding-top: 45px;
+        }
+
+        .padt-5{
+            padding-top: 8px;
+        }
+
+        .clear{
+            margin-top: -15px;
+            cursor: pointer;
+        }
+
     </style>
   </head>
   <body>
     <div class="container-fluid">
         <div class="row">
             <div class="col-8">
-                <div class="bg-white scroll">
+                <div class="bg-white scroll h-95vh">
                     <div class="float-right round">round <span id="b-round">#</span></div>
                     <div class="float-left">
                         <img src="https://wunca.uni.net.th/wunca39/wp-content/uploads/2019/03/WUNCA-39th_png-ok-copy.png" class="logo"/>
@@ -154,7 +190,23 @@
                 </div>
             </div>
             <div class="col-4">
-                <div class="bg-white scroll">
+                <div class="bg-white h-250">
+                    <div class="row text-center">
+                        <div class="col-7 padt-5">
+                            <span class="r-number violet">
+                                #
+                            </span>
+                            <h5 class="clear"><u><span onclick="fnclear()">Clear</span></u></h5>
+                        </div>
+                        <div class="col-4 pt-45">
+                            <button type="button" class="btn btn-warning btn-lg btn-block" onclick="random()">
+                                <i class="fa fa-plus-square" aria-hidden="true"></i> <br>
+                                Click
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white scroll h-50vh">
                     <div class="text-center">
                         <span class="violet">Bingo</span><span class="orange"> Award</span>
                     </div>
@@ -196,21 +248,88 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     
     <script>
         var bingoNumber = $("#bingoNumber");
         var b_round = $("#b-round");
         var bingoResult = $("#bingoResult");
         var base_url = "<?php echo base_url() ?>/api/";
+        var r_number = $(".r-number");
+        var items = [];
+        var base_url = "<?php echo base_url() ?>/api/";
+
+        function pushNumber(number){
+            $.post(base_url+"/addnumber", {
+                "number": number
+            },function (data, textStatus, jqXHR) {
+                var json_data = JSON.parse(data);
+                if(json_data.status){
+                    localStorage.setItem("balls", JSON.stringify(items));
+                    getResultShow();
+                }
+            });
+        }
+        
+        function fnclear(){
+            $.confirm({
+                title: 'คำเตือน!',
+                content: 'คุณต้องการล้างข้อมูลใช่หรือไม่',
+                type: 'red',
+                buttons: {
+                    ok: {
+                        text: 'ตกลง', // With spaces and symbols
+                        action: function () {
+                            initBallBingo();
+                        }
+                    },
+                    cancle: {
+                        text: 'ยกเลิก'
+                    }
+                }
+            });
+        }
+
+        function initBallBingo(){
+            items = [];
+            var i = 1;
+            var end = 75;
+            for(i=1;i<=end;i++){
+                items.push(i);
+            }
+            localStorage.setItem("init_ball", JSON.stringify(items));
+            localStorage.setItem("balls", JSON.stringify(items));
+            r_number.html("#");
+        }
+
+        function removeBallBingo(number){
+            if(items.length == 0){
+                alert("หมดแล้ว");
+            }
+            for( var i = 0; i < items.length; i++){ 
+                if ( items[i] === number) {
+                    items.splice(i, 1); 
+                }
+            }
+
+            pushNumber(number);
+        }
+
+        function random(){
+            var item = items[Math.floor(Math.random()*items.length)];
+            r_number.html(item);
+            removeBallBingo(item)
+            console.log(items);
+        }
 
         function renderBingoNumber(arrBingoNumber){
             var length = arrBingoNumber.length;
             var html = "";
             $.each(arrBingoNumber, function (i, v) {
                 if(i == length-1){
-                    html += '<div class="col-md-2 padding-b-40"><span class="last-ball">'+v+'</span></div>';
+                    html += '<div class="padding-b-40 w-10p"><span class="last-ball">'+v+'</span></div>';
                 }else{
-                    html += '<div class="col-md-2 padding-b-40"><span class="ball">'+v+'</span></div>';
+                    html += '<div class="padding-b-40 w-10p"><span class="ball">'+v+'</span></div>';
                 }
             });
             bingoNumber.html(html);
@@ -246,6 +365,13 @@
 
         $(document).ready(function () {
             getResultShow();
+            var oldBallBingo = JSON.parse(localStorage.getItem("balls"));
+            console.log(oldBallBingo);
+            if(oldBallBingo != null){
+                items = oldBallBingo;
+            }else{
+                initBallBingo();
+            }
             setInterval(function(){ getResultShow(); }, 5000);
         });
     </script>

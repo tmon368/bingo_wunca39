@@ -333,7 +333,8 @@
             }
 
             .none-event{
-                
+                pointer-events: none;
+                filter: grayscale(20%);
             }
     </style>
   </head>
@@ -348,14 +349,14 @@
             <div class="col-lg-6">
                 <img src="https://wunca.uni.net.th/wunca39/wp-content/uploads/2019/03/WUNCA-39th_png-ok-copy.png" id="icon" alt="User Icon" width="30%" /><br>
                 <div class="row mt">
-                    <div class="col-lg-9 text-left">สวัสดีคุณ <span id="b-name"></span> </div>
+                    <div class="col-lg-9 text-left">สวัสดีคุณ <span id="b-name"></span> ผู้เข้าร่วมงาน <span id="b-code"></span> </div>
                     <div class="col-lg-3"><a href="#" class="c-orange" onclick="logout()">[ออกจากระบบ]</a></div>
                 </div>
                 <div class="t-border">
                     <div class="float-right round">round <span id="b-round">#</span></div>
                     <h1 class="text-center white padding-45">Bingo</h1>
                     <div class="text-center">
-                        <table>
+                        <table id="t-board">
                             <tr>
                                 <td><span class="dot number-0" data-number="0">1</span></td>
                                 <td><span class="dot number-1" data-number="1">2</span></td>
@@ -395,7 +396,7 @@
                     </div>
                     <div class="row text-center mt">
                         <div class="col">
-                            <button type="button" class="btn btn-warning btn-block" onclick="bingo()">Bingo</button>
+                            <button type="button" id="btn-bingo" class="btn btn-warning btn-block" onclick="bingo()">Bingo</button>
                         </div>
                         <div class="col">
                             <button type="button" class="btn btn-warning btn-block" onclick="clearBroad()">รอบถัดไป</button>
@@ -468,6 +469,7 @@
                 window.location.href = "bingo";
             }else{
                 $("#b-name").html(userData.name);
+                $("#b-code").html(userData.userId);
                 $("#b-round").html(round);
             }
 
@@ -510,6 +512,8 @@
                     $("body").addClass("bg-fire");
                     $("#fire").addClass("pyro");
                     alert("Bingo!!");
+                    $("#t-board").addClass("none-event");
+                    $("#btn-bingo").addClass("none-event");
                 }else{
                     alert("ตรวจสอบอีกครั้ง");
                 }   
@@ -530,6 +534,8 @@
                         var userData = JSON.parse(localStorage.getItem("data"));
                         checkUser(userData, new_round);
                         $("#fire").removeClass("pyro");
+                        $("#t-board").removeClass("none-event");
+                        $("#btn-bingo").removeClass("none-event");
                         removeRenderBroad();
                     }else{
                         $.confirm({

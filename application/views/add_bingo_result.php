@@ -123,6 +123,9 @@
         .f-53{
             font-size: 53px;
         }
+        .w-10p{
+            width: 10%;
+        }
     </style>
   </head>
   <body>
@@ -294,9 +297,9 @@
             var html = "";
             $.each(arrBingoNumber, function (i, v) {
                 if(i == length-1){
-                    html += '<div class="col-md-2 padding-b-40" onclick="delNumber('+v+')"><span class="last-ball">'+v+'</span></div>';
+                    html += '<div class="padding-b-40 w-10p" onclick="delNumber('+v+')"><span class="last-ball">'+v+'</span></div>';
                 }else{
-                    html += '<div class="col-md-2 padding-b-40" onclick="delNumber('+v+')"><span class="ball">'+v+'</span></div>';
+                    html += '<div class="padding-b-40 w-10p" onclick="delNumber('+v+')"><span class="ball">'+v+'</span></div>';
                 }
             });
             bingoNumber.html(html);
