@@ -440,13 +440,33 @@
         function createBroad(){
             var tempBroad = JSON.parse(localStorage.getItem("broad"));
             var broad = [];
-            $.each(tempBroad, function (i, v) { 
-                if(i != 12){
-                    broad.push(v.data);
-                }
-            });
-            console.log(broad);
-            setBroad(broad);
+            if(tempBroad.length > 0){
+                $.each(tempBroad, function (i, v) { 
+                    if(i != 12){
+                        broad.push(v.data);
+                    }
+                });
+                setBroad(broad);
+            }else{
+                var userData = JSON.parse(localStorage.getItem("data"));
+                $.post(base_url+"/getBingoCard", {
+                    "userId": userData.userId,
+                    "name": userData.name
+                },function (data, textStatus, jqXHR) {
+                    var json_data = JSON.parse(data);
+                    // console.log(json_data);
+                    if(json_data.status){
+                        localStorage.setItem("round", parseInt(json_data.round));
+                        localStorage.setItem("broad-result", JSON.stringify([]));
+                        localStorage.setItem("broad", JSON.stringify(json_data.data));
+                        if(json_data.data.length > 0){
+                            createBroad();
+                        }else{
+                            alert("โหลดหน้าใหม่อีกครั้ง");
+                        }
+                    }                    
+                });
+            }
         }
 
         function setBroad(broad){
