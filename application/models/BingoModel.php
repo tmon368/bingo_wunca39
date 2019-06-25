@@ -59,9 +59,26 @@ class BingoModel extends CI_Model {
             }
         }else {
             //ยังไม่กำหนด sheet ให้
-            $sheetID = $this->getNewSheetID($gameID);
-            $sql = "INSERT INTO  players (`id`, `job_id`, `fname`, `code_id`, `bimgo_sheet`) VALUES (NULL,'$gameID','$username','$code_id','$sheetID')";
+            //$sheetID = $this->getNewSheetID($gameID);
+            //$sql = "INSERT INTO  players (`id`, `job_id`, `fname`, `code_id`, `bimgo_sheet`) VALUES (NULL,'$gameID','$username','$code_id','$sheetID')";
+            $sql = " INSERT INTO players SELECT NULL,$gameID,'$username','$code_id',(IfNull(max(bimgo_sheet),0)) + 1 FROM players; ";
             $this->db->query($sql);
+           /*
+            $this->db->trans_start(); // Query will be rolled back
+            $this->db->select("max(bimgo_sheet) as max");
+            $max = $this->db->get("players")->row("max");
+            $lastSheet = (empty($max))?1:$max+1;
+            $sql = "INSERT INTO  players (id, job_id, fname, code_id, bimgo_sheet) VALUES (NULL,'$gameID','$username','$code_id','$lastSheet')";
+            $this->db->query($sql);
+            $this->db->trans_complete();
+*/
+            
+            $sql = "SELECT * FROM players WHERE code_id = '$code_id' and job_id='$gameID'";
+            $query = $this->db->query($sql);
+            foreach ($query->result() as $row)
+            {
+                $sheetID = $row->bimgo_sheet;
+            }
         }
         
         $sheetDetail = $this->getSheetDetailArray($sheetID);

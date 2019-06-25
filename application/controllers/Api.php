@@ -19,9 +19,6 @@ class Api extends CI_Controller {
 	    $name = $_POST["name"];
 	    $code_id = $_POST["userId"];
 	    
-//	    $name = "เจริญพร  บัวแย้ม";
-//	    $code_id= "W00000";
-	    
 	    $this->load->model('BingoModel');
 	    $data = $this->BingoModel->getBigoSheet($code_id,$name);
 	    
@@ -217,12 +214,6 @@ class Api extends CI_Controller {
 	    
 	    $this->load->model('BingoSheet');
 	    $this->BingoSheet->newgamebingo();
-	    $data = $this->random_data($set,$arr_amount,$sheet_size,$sheet_size);
-	    $this->BingoSheet->insert_sheet($data,$sheet_size);
-	    //Bingo_Job
-	    //bingo_player
-	    //bingo_value
-	    //players
 	    
 	    $data = array('status'=>true);
 	    echo json_encode($data);
