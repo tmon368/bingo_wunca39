@@ -531,11 +531,35 @@
                 if(isBingo){
                     $("body").addClass("bg-fire");
                     $("#fire").addClass("pyro");
-                    alert("Bingo!!");
-                    $("#t-board").addClass("none-event");
-                    $("#btn-bingo").addClass("none-event");
+                    $.confirm({
+                        title: 'ยินดีด้วย!',
+                        content: 'Bingo!!!',
+                        type: 'orange',
+                        typeAnimated: true,
+                        buttons: {
+                            cancle: {
+                                text: 'ตกลง',
+                                action: function(){
+                                    $("#t-board").addClass("none-event");
+                                    $("#btn-bingo").addClass("none-event");
+                                }
+                            }
+                        }
+                    });
                 }else{
-                    alert("ตรวจสอบอีกครั้ง");
+                    $.confirm({
+                        title: 'คำเตือน!',
+                        content: 'โปรดตรวจสอบหมายเลขอีกครั้ง',
+                        type: 'orange',
+                        typeAnimated: true,
+                        buttons: {
+                            cancle: {
+                                text: 'ตกลง',
+                                action: function(){
+                                }
+                            }
+                        }
+                    });
                 }   
             });
         }
